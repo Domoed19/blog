@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.conf import settings
 from django.http import HttpResponse
 
-from posts.models import Post, Address
+from posts.models import Post
 
 logger = logging.getLogger(__name__)
 
