@@ -1,15 +1,34 @@
+
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Homepage{% endblock %}
-<div class="container text-center">
-  <div class="row">
-    <div class="col-m-">
 
 {% block content %}
-<div class="conteiner">
+  <div class="container">
     <h1>Homepage</h1>
- </div>
+    <div class="row">
+      {% for product in product_list %}
+        {% if forloop.counter0|divisibleby:3 %}
+          </div><div class="row mb-3">
+        {% endif %}
+        <div class="col-4">
+          <div class="card">
+            {% if product.image %}
+              <img src="{{ product.image.url }}" class="img-fluid img-thumbnail" alt="{{ product.title }}">
+            {% else %}
+              <img src="{% static 'no-image.jpg' %}" class="img-fluid img-thumbnail" alt="{{ product.title }}">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ product.title }}</h5>
+              <p class="card-text">
+                Color: {{ product.color }}<br>
+                Cost: {{ product.cost }}
+              </p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+  </div>
 {% endblock %}
-  </div>
-  </div>
-</div>
