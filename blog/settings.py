@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
+    'crispy_bootstrap5',
     'posts',
     'profiles',
     'shop',
@@ -46,7 +48,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -57,7 +59,7 @@ ROOT_URLCONF = 'blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,6 +71,9 @@ TEMPLATES = [
         },
     },
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 WSGI_APPLICATION = 'blog.wsgi.application'
 
@@ -123,7 +128,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [BASE_DIR /"static"]
+
+STATIC_ROOT = None
+STATIC_URL = "static/"
+
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "media/"
+
+MY_PATH_ZNACH = os.environ.get('MY_PATH')
+PEREMEN_01 = (os.environ.get('PEREMEN_01'))
+PEREMEN_02 = os.environ.get('PEREMEN_02')
+PEREMEN_03 = os.environ.get('PEREMEN_03')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -150,8 +167,9 @@ LOGGING = {
     }
 }
 
+STATICFILES_FINDERS = [
+   "django.contrib.staticfiles.finders.FileSystemFinder",
+   "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
 
-MY_PATH_ZNACH = os.environ.get('MY_PATH')
-PEREMEN_01 = (os.environ.get('PEREMEN_01'))
-PEREMEN_02 = os.environ.get('PEREMEN_02')
-PEREMEN_03 = os.environ.get('PEREMEN_03')
+
