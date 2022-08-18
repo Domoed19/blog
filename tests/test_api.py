@@ -29,8 +29,6 @@ class TestViews:
         assert response.status_code == 200
         assert len(response.data) == 1
 
-    def setup_car_method(self):
-        self.client = Client()
 
     def test_car_list(self):
         CarFactory.create_batch(5)
