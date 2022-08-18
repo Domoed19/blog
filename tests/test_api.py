@@ -29,17 +29,17 @@ class TestViews:
         assert response.status_code == 200
         assert len(response.data) == 1
 
-    def setup_method(self):
+    def setup_car_method(self):
         self.client = Client()
 
-    def test_posts_list(self):
+    def test_car_list(self):
         CarFactory.create_batch(5)
         response = self.client.get("/api/cars/")
         assert response.status_code == 200
         assert len(response.data) == 5
 
 
-    def test_post_create(self):
+    def test_car_create(self):
         data={"title":"title", "model":"model", "color":"color", "text":"text"}
         response = self.client.post("/api/cars/", data=data)
 
