@@ -29,10 +29,6 @@ class TestViews:
         assert response.status_code == 200
         assert len(response.data) == 1
 
-
-@pytest.mark.django_db
-class TestViews:
-
     def setup_method(self):
         self.client = Client()
 
@@ -51,3 +47,5 @@ class TestViews:
         response = self.client.get("/api/cars/")
         assert response.status_code == 200
         assert len(response.data) == 1
+
+
