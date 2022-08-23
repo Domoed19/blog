@@ -4,6 +4,7 @@ from rest_framework.response import Response
 
 from api.posts.serializers import PostSerializer
 from posts.models import Post
+from rest_framework.permissions import IsAuthenticated
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -13,7 +14,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
     queryset = Post.objects.all().order_by("-created_at")
     serializer_class = PostSerializer
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

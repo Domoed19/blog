@@ -1,4 +1,5 @@
 import factory
+from django.contrib.auth.models import User
 
 from factory.django import DjangoModelFactory
 
@@ -21,3 +22,10 @@ class CarFactory(DjangoModelFactory):
    model = factory.Faker("word")
    color = factory.Faker("word")
    text = factory.Faker("paragraph")
+
+class UserFactory(DjangoModelFactory):
+   class Meta:
+       model = User
+
+   username = factory.Faker("word")
+   email = factory.Faker("email")

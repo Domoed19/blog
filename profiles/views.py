@@ -5,6 +5,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import logout, login, authenticate
 
+from profiles.services import create_user
+
 
 def profiles(request):
     if request.GET.get("key") == "test":
@@ -24,14 +26,17 @@ def register(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = User.objects.create(
+            # data = form.cleaned_data.copy()
+            # data["username"] = form.cleaned_data["email"]
+            # create_user(**data)
+
+            create_user(
                 email=form.cleaned_data["email"],
                 username=form.cleaned_data["email"],
                 first_name=form.cleaned_data["first_name"],
                 last_name=form.cleaned_data["last_name"],
+                password=form.cleaned_data["password"],
             )
-            user.set_password(form.cleaned_data["password"])
-            user.save()
             return redirect("/")
     else:
         form = RegisterForm()

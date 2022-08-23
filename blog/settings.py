@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'rest_framework',
+    'rest_framework.authtoken',
     'posts',
     'profiles',
     'shop',
@@ -174,4 +175,14 @@ STATICFILES_FINDERS = [
    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
+# https://www.django-rest-framework.org/tutorial/quickstart/
 
+REST_FRAMEWORK = {
+   "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+   "DEFAULT_AUTHENTICATION_CLASSES": [
+       "rest_framework.authentication.BasicAuthentication",
+       "rest_framework.authentication.SessionAuthentication",
+   ],
+   "PAGE_SIZE": 10,
+
+}
