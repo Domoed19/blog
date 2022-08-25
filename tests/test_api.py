@@ -12,6 +12,7 @@ class TestViews:
 
     def setup_method(self):
         self.client = Client()
+        self.fake = faker.Faker()
         self.user = UserFactory()
         self.fake = faker.Faker()
 
@@ -73,6 +74,8 @@ class TestViews:
         response = self.client.get("/api/cars/")
         assert response.status_code == 200
         assert len(response.data["results"]) == 1
+
+
 
 
 

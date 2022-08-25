@@ -8,6 +8,7 @@ class Product(models.Model):
     color = models.CharField(max_length=200, choices=COLOR_CHOICES, blank=True, null=True)
     cost = models.IntegerField()
     image = ImageField(upload_to="products/", blank=True, null=True)
+    slug = models.SlugField(blank=True, null=True)
     def __str__(self):
         return f"Product:{self.title}"
 
