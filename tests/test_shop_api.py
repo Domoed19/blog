@@ -3,7 +3,7 @@ import pytest
 from django.test.client import Client
 
 from shop.models import Purchase
-from tests.factories import PostFactory, UserFactory, PurchaseFactory, ProductFactory
+from tests.factories import UserFactory, PurchaseFactory, ProductFactory
 
 
 @pytest.mark.django_db
@@ -45,7 +45,7 @@ class TestPurchasesViews:
 
 
     def test_product_create(self):
-
+        product = ProductFactory
         self.client.force_login(self.user)
 
         data={"title":"title", "color":"color", "cost":"cost"}

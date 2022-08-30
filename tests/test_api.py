@@ -8,7 +8,7 @@ from posts.models import Post
 
 
 @pytest.mark.django_db
-class TestViews:
+class TestAuthViews:
 
     def setup_method(self):
         self.client = Client()
@@ -25,8 +25,8 @@ class TestViews:
             "password": self.fake.md5(),
             "first_name": self.fake.first_name(),
             "last_name": self.fake.last_name(),
-
         }
+
         response = self.client.post("/api/register/", data=data)
         assert response.status_code == 201
 
