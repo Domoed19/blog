@@ -1,0 +1,47 @@
+version: '3.3'
+services:
+
+  redis:
+    image: redis:latest
+
+
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=django
+      - POSTGRES_USER=domoeddjango
+      - POSTGRES_PASSWORD=domoeddjango
+
+  django: &base_container
+    image: nick/django-blog:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app/
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - DATABASE_HOST=postgres
+      - REDIS_HOST=redis
+    command: |
+      python manage.py runserver 0.0.0.0:8000
+
+
+  worker:
+    <<: *base_container
+    ports: [ ]
+    command: |
+      python manage.py rqworker default
+
+
+  bot:
+    <<: *base_container
+    ports: [ ]
+    environment:
+      - DATABASE_HOST=postgres
+      - REDIS_HOST=redis
+      - BOT_TOKEN=5676685276:AAHX6fYmP_ZtGYAo8FcAnFb6yM2LvhUVrZk
+      - CHAT_ID=1467327719
+    command: |
+      python manage.py run_bot

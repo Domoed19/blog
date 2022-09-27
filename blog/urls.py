@@ -34,6 +34,7 @@ urlpatterns = [
     path('products/', products, name='products'),
     path("api/", include("api.urls", namespace="api")),
     path('cars/', add_car, name='cars'),
+    path("django-rq/", include("django_rq.urls")),
 
 ]
 

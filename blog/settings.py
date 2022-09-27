@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'my-secret-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DEBUG', True))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -42,10 +42,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'django_filters',
+    'django_rq',
+    'domoed',
     'posts',
     'profiles',
     'shop',
     'cars',
+
 
 ]
 
@@ -77,6 +80,10 @@ TEMPLATES = [
     },
 ]
 
+
+
+
+
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
@@ -92,12 +99,30 @@ DATABASES = {
        "NAME": "django",
        "USER": "domoeddjango",
        "PASSWORD": "domoeddjango",
-       "HOST": "localhost",
+       "HOST": os.environ.get("DATABASE_HOST", "localhost"),
        "PORT": 5432,
    }
 }
 
 
+
+# https://docs.djangoproject.com/en/4.1/ref/settings/#caches
+REDIS_HOST = os.environ.get("REDIS_HOST", "localhost")
+CACHES = {
+   "default": {
+       "BACKEND": "django.core.cache.backends.redis.RedisCache",
+       "LOCATION": f"redis://{REDIS_HOST}:6379",
+   }
+}
+
+RQ_QUEUES = {
+   "default": {
+       "HOST": REDIS_HOST,
+       "PORT": 6379,
+       "DB": 0,
+       "DEFAULT_TIMEOUT": 360,
+   },
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -189,3 +214,7 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,
 
 }
+
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+CHAT_ID = os.getenv("CHAT_ID")
