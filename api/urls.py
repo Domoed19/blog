@@ -3,23 +3,21 @@ from rest_framework import routers
 
 from api.auth.views import RegisterView, LoginView
 from api.posts.views import PostViewSet
-from api.cars.views import CarViewSet
-from api.purchases.views import PurchaseList, ProductList, ProductAdd
+from api.purchases.views import PurchaseList, ProductList, ProductPurchaseView, PopularProductList
 
-app_name = 'api'
+app_name = "api"
 
 router = routers.DefaultRouter()
-router.register(r'posts', PostViewSet)
-router.register(r'cars', CarViewSet)
-
+router.register(r"posts", PostViewSet, basename="pk")
 
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('register/', RegisterView.as_view(), name="register"),
-    path('login/', LoginView.as_view(), name="login"),
-    path('purchases/', PurchaseList.as_view(), name="purchases"),
-    path('products/', ProductList.as_view(), name="products"),
-    path('productadd/', ProductAdd.as_view(), name="product-add"),
-    path('auth/', include("rest_framework.urls", namespace="rest_framework")),
+    path("", include(router.urls)),
+    path("register/", RegisterView.as_view(), name="register"),
+    path("login/", LoginView.as_view(), name="login"),
+    path("products/", ProductList.as_view(), name="products"),
+    path("products/popular/", PopularProductList.as_view(), name="popular_products"),
+    path("products/<int:product_id>/purchase/", ProductPurchaseView.as_view(), name="purchase-product"),
+    path("purchases/", PurchaseList.as_view(), name="purchases"),
+    path("auth/", include("rest_framework.urls", namespace="rest_framework")),
 ]

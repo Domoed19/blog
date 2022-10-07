@@ -8,7 +8,7 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      - POSTGRES_DB=django
+      - POSTGRES_DB=domoed
       - POSTGRES_USER=domoeddjango
       - POSTGRES_PASSWORD=domoeddjango
 
