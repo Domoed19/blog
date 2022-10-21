@@ -20,7 +20,6 @@ from django.conf import settings
 from posts.views import index, post_add
 from profiles.views import register, profiles, login_view, logout_view
 from shop.views import products
-from cars.views import add_car
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -33,7 +32,6 @@ urlpatterns = [
     path("logout/", logout_view, name="logout"),
     path("products/", products, name="products"),
     path("api/", include("api.urls", namespace="api")),
-    path("cars/", add_car, name="cars"),
     path("django-rq/", include("django_rq.urls")),
 ]
 
