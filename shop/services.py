@@ -68,6 +68,10 @@ def get_byn_usd_exchange_rate():
 
 def get_popular_products():
     queryset = Product.objects.annotate(
-        sold=Sum(F("cost") * F("purchases__count"), output_field=models.FloatField(), default=0)
+        sold=Sum(
+            F("cost") * F("purchases__count"),
+            output_field=models.FloatField(),
+            default=0,
+        )
     )
     return queryset.order_by("-sold")

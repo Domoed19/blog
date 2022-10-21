@@ -1,4 +1,5 @@
-from  rest_framework import  serializers
+from rest_framework import serializers
+
 
 class RegisterSerializer(serializers.Serializer):
     first_name = serializers.CharField(max_length=255)

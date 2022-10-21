@@ -30,7 +30,9 @@ class TestPurchasesViews:
 
         assert response.status_code == 200
         assert response.data["count"] == 1
-        assert response.data["results"][0]["product"]["title"] == purchase_1.product.title
+        assert (
+            response.data["results"][0]["product"]["title"] == purchase_1.product.title
+        )
 
         purchase_2 = PurchaseFactory(user=self.user)
         self.client.force_login(self.user)
@@ -38,21 +40,20 @@ class TestPurchasesViews:
 
         assert response.status_code == 200
         assert response.data["count"] == 1
-        assert response.data["results"][0]["product"]["title"] == purchase_2.product.title
+        assert (
+            response.data["results"][0]["product"]["title"] == purchase_2.product.title
+        )
 
         assert Purchase.objects.count() == 2
-
-
 
     def test_product_create(self):
         product = ProductFactory
         self.client.force_login(self.user)
 
-        data={"title":"title", "color":"color", "cost":"cost"}
+        data = {"title": "title", "color": "color", "cost": "cost"}
         response = self.client.post("/api/productadd/", data=data)
         assert response.status_code == 201
 
         response = self.client.get("/api/productadd/")
         assert response.status_code == 200
         assert len(response.data["results"]) == 1
-

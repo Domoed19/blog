@@ -11,8 +11,7 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ("title", "slug", "text")
     raw_id_fields = ("author",)
 
+
 @admin.register(Tag)
 class TagsAdmin(admin.ModelAdmin):
     search_fields = ("title",)
-
-

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'my-secret-key')
+SECRET_KEY = os.environ.get("SECRET_KEY", "my-secret-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get('DEBUG', True))
+DEBUG = bool(os.environ.get("DEBUG", True))
 
 ALLOWED_HOSTS = ["*"]
 
@@ -31,97 +32,86 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'crispy_forms',
-    'crispy_bootstrap5',
-    'rest_framework',
-    'rest_framework.authtoken',
-    'django_filters',
-    'django_rq',
-    'domoed',
-    'posts',
-    'profiles',
-    'shop',
-    'cars',
-
-
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "crispy_forms",
+    "crispy_bootstrap5",
+    "rest_framework",
+    "rest_framework.authtoken",
+    "django_filters",
+    "django_rq",
+    "domoed",
+    "posts",
+    "profiles",
+    "shop",
+    "cars",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'blog.urls'
+ROOT_URLCONF = "blog.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [BASE_DIR / "templates"],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+            ]
         },
-    },
+    }
 ]
 
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-
-
-CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
-CRISPY_TEMPLATE_PACK = 'bootstrap5'
-
-WSGI_APPLICATION = 'blog.wsgi.application'
+WSGI_APPLICATION = "blog.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-   "default": {
-       "ENGINE": "django.db.backends.postgresql",
-       "NAME": "domoed",
-       "USER": "domoeddjango",
-       "PASSWORD": "domoeddjango",
-       "HOST": os.environ.get("DATABASE_HOST", "localhost"),
-       "PORT": 5432,
-   }
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "domoed",
+        "USER": "domoeddjango",
+        "PASSWORD": "domoeddjango",
+        "HOST": os.environ.get("DATABASE_HOST", "localhost"),
+        "PORT": 5432,
+    }
 }
-
 
 
 # https://docs.djangoproject.com/en/4.1/ref/settings/#caches
 REDIS_HOST = os.environ.get("REDIS_HOST", "localhost")
 CACHES = {
-   "default": {
-       "BACKEND": "django.core.cache.backends.redis.RedisCache",
-       "LOCATION": f"redis://{REDIS_HOST}:6379",
-   }
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": f"redis://{REDIS_HOST}:6379",
+    }
 }
 
 RQ_QUEUES = {
-   "default": {
-       "HOST": REDIS_HOST,
-       "PORT": 6379,
-       "DB": 0,
-       "DEFAULT_TIMEOUT": 360,
-   },
+    "default": {"HOST": REDIS_HOST, "PORT": 6379, "DB": 0, "DEFAULT_TIMEOUT": 360}
 }
 
 # Password validation
@@ -129,26 +119,20 @@ RQ_QUEUES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -159,7 +143,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 
-STATICFILES_DIRS = [BASE_DIR /"static"]
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 STATIC_ROOT = None
 STATIC_URL = "static/"
@@ -167,39 +151,29 @@ STATIC_URL = "static/"
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "media/"
 
-MY_PATH_ZNACH = os.environ.get('MY_PATH')
-PEREMEN_01 = (os.environ.get('PEREMEN_01'))
-PEREMEN_02 = os.environ.get('PEREMEN_02')
-PEREMEN_03 = os.environ.get('PEREMEN_03')
+MY_PATH_ZNACH = os.environ.get("MY_PATH")
+PEREMEN_01 = os.environ.get("PEREMEN_01")
+PEREMEN_02 = os.environ.get("PEREMEN_02")
+PEREMEN_03 = os.environ.get("PEREMEN_03")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {"console": {"class": "logging.StreamHandler"}},
+    "loggers": {
+        "": {"handlers": ["console"], "level": "INFO"},
+        "django.db.backends": {"handlers": ["console"], "level": "ERROR"},
     },
-    'loggers': {
-        '': {
-            'handlers': ['console'],
-            'level': 'INFO',
-        },
-        'django.db.backends': {
-            'handlers': ['console'],
-            'level': 'ERROR',
-        }
-    }
 }
 
 STATICFILES_FINDERS = [
-   "django.contrib.staticfiles.finders.FileSystemFinder",
-   "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
 # https://www.django-rest-framework.org/tutorial/quickstart/
@@ -212,7 +186,6 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
     ],
     "PAGE_SIZE": 10,
-
 }
 
 

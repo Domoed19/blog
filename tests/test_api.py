@@ -9,7 +9,6 @@ from posts.models import Post
 
 @pytest.mark.django_db
 class TestAuthViews:
-
     def setup_method(self):
         self.client = Client()
         self.fake = faker.Faker()
@@ -20,7 +19,7 @@ class TestAuthViews:
 
         self.client.force_login(self.user)
 
-        data={
+        data = {
             "email": self.fake.email(),
             "password": self.fake.md5(),
             "first_name": self.fake.first_name(),
@@ -44,12 +43,11 @@ class TestAuthViews:
         assert len(response.data["results"]) == 10
         assert response.data["count"] == 15
 
-
     def test_post_create(self):
 
         self.client.force_login(self.user)
 
-        data={"title":"title", "text":"text"}
+        data = {"title": "title", "text": "text"}
         response = self.client.post("/api/posts/", data=data)
         assert response.status_code == 201
 
@@ -58,24 +56,17 @@ class TestAuthViews:
         assert len(response.data["results"]) == 1
         assert "image" in response.data["results"][0]
 
-
     def test_car_list(self):
         CarFactory.create_batch(5)
         response = self.client.get("/api/cars/")
         assert response.status_code == 200
         assert len(response.data["results"]) == 5
 
-
     def test_car_create(self):
-        data={"title":"title", "model":"model", "color":"color", "text":"text"}
+        data = {"title": "title", "model": "model", "color": "color", "text": "text"}
         response = self.client.post("/api/cars/", data=data)
         assert response.status_code == 201
 
         response = self.client.get("/api/cars/")
         assert response.status_code == 200
         assert len(response.data["results"]) == 1
-
-
-
-
-

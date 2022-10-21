@@ -23,19 +23,18 @@ from shop.views import products
 from cars.views import add_car
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', index, name='index'),
-    path('post-add/', post_add, name='post-add'),
-    path('profiles/', profiles, name='profiles'),
-    path('register/', register, name='register'),
-    path('products/', products, name='products'),
-    path('login/', login_view, name='login'),
-    path('logout/', logout_view, name='logout'),
-    path('products/', products, name='products'),
+    path("admin/", admin.site.urls),
+    path("", index, name="index"),
+    path("post-add/", post_add, name="post-add"),
+    path("profiles/", profiles, name="profiles"),
+    path("register/", register, name="register"),
+    path("products/", products, name="products"),
+    path("login/", login_view, name="login"),
+    path("logout/", logout_view, name="logout"),
+    path("products/", products, name="products"),
     path("api/", include("api.urls", namespace="api")),
-    path('cars/', add_car, name='cars'),
+    path("cars/", add_car, name="cars"),
     path("django-rq/", include("django_rq.urls")),
-
 ]
 
 if settings.DEBUG:
@@ -45,4 +44,3 @@ if settings.DEBUG:
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

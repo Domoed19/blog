@@ -1,4 +1,3 @@
-
 from django.core.cache import cache
 from django.db.models import Count, F, QuerySet, Sum
 from django.shortcuts import render
@@ -42,7 +41,10 @@ def product_get(request):
     order_by = request.GET.get("order_by")
 
     # product_info = product_sorting(product_info, order_by)
-    return render(request, "product.html", {"product_info": product_info, "user_info": user_info})
+    return render(
+        request, "product.html", {"product_info": product_info, "user_info": user_info}
+    )
+
 
 #
 # def products(request):
@@ -66,4 +68,3 @@ def product_get(request):
 #     return response
 
 # Create your views here.
-

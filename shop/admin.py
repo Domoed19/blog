@@ -4,23 +4,19 @@ from shop.models import Product, Purchase
 
 
 class PurchaseInline(admin.TabularInline):
-   model = Purchase
+    model = Purchase
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ("title","color", "cost")
+    list_display = ("title", "color", "cost")
     search_fields = ("title",)
     list_filter = ("cost",)
-    inlines = [
-        PurchaseInline,
-    ]
+    inlines = [PurchaseInline]
+
 
 @admin.register(Purchase)
 class PurchaseAdmin(admin.ModelAdmin):
-    list_display = ("user", "product", "count",)
+    list_display = ("user", "product", "count")
     list_filter = ("count",)
     search_fields = ("product__title",)
-
-
-

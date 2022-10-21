@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
-#Почитать про signals отдельно
-from domoed.bot import run_bot
 
+# Почитать про signals отдельно
+from domoed.bot import run_bot
 
 
 class Command(BaseCommand):
@@ -9,4 +9,3 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         run_bot()
-

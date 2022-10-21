@@ -22,6 +22,7 @@ def profiles(request):
 
 # new
 
+
 def register(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
@@ -52,7 +53,7 @@ def login_view(request):
         if form.is_valid():
             user = authenticate(request=request, **form.cleaned_data)
             if user is None:
-                return HttpResponse('BadRequest', status=400)
+                return HttpResponse("BadRequest", status=400)
             login(request, user)
             return redirect("index")
     else:

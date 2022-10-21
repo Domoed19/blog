@@ -4,25 +4,16 @@ from django.contrib.auth.models import User
 from factory.django import DjangoModelFactory
 import factory.fuzzy
 from posts.models import Post
-from cars.models import Car
 from shop.models import Product, Purchase, COLOR_CHOICES
 
 
 class PostFactory(DjangoModelFactory):
-   class Meta:
-       model = Post
+    class Meta:
+        model = Post
 
-   title = factory.Faker("word")
-   text = factory.Faker("paragraph")
+    title = factory.Faker("word")
+    text = factory.Faker("paragraph")
 
-class CarFactory(DjangoModelFactory):
-   class Meta:
-       model = Car
-
-   title = factory.Faker("word")
-   model = factory.Faker("word")
-   color = factory.Faker("word")
-   text = factory.Faker("paragraph")
 
 class UserFactory(DjangoModelFactory):
     class Meta:

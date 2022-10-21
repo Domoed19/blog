@@ -1,8 +1,12 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from api.purchases.serializers import PurchaseSerializer, ProductSerializer, PurchaseCreateSerializer, \
-    PopularProductSerializer
+from api.purchases.serializers import (
+    PurchaseSerializer,
+    ProductSerializer,
+    PurchaseCreateSerializer,
+    PopularProductSerializer,
+)
 from shop.models import Purchase, Product
 from rest_framework import generics, status
 from rest_framework import filters as rest_filters
@@ -57,7 +61,7 @@ class ProductPurchaseView(generics.CreateAPIView):
             Purchase.objects.create(
                 user=request.user,
                 product=product,
-                count=serializer.validated_data["count"]
+                count=serializer.validated_data["count"],
             )
             return Response(status=status.HTTP_201_CREATED)
         except Product.DoesNotExist:
@@ -67,4 +71,3 @@ class ProductPurchaseView(generics.CreateAPIView):
 class PopularProductList(generics.ListAPIView):
     serializer_class = PopularProductSerializer
     queryset = get_popular_products()
-

@@ -5,10 +5,13 @@ from telegram.ext import ContextTypes
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    cache.set("chat_id", update.effective_chat.id, 60*60*24)
+    cache.set("chat_id", update.effective_chat.id, 60 * 60 * 24)
     await update.message.reply_text(f"Start {update.effective_user.first_name}")
 
+
 "update.message.date запустить дэбагер и найти где приходят сообщения"
+
+
 async def message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(f"Message {update.effective_user.first_name}")
 

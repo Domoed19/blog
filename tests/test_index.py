@@ -1,4 +1,3 @@
-
 import pytest
 
 from django.test.client import Client
@@ -6,7 +5,6 @@ from django.test.client import Client
 
 @pytest.mark.django_db
 class TestViews:
-
     def setup_method(self):
         self.client = Client()
 
